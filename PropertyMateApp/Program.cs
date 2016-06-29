@@ -11,8 +11,7 @@
     using PropertyMateApp.Properties;
     using Serilog;
     using Serilog.Core;
-    using Topshelf;
-
+    
     [UsedImplicitly]
     class Program
     {
