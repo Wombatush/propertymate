@@ -6,6 +6,7 @@
     using Nancy;
     using PropertyMateApp.Impl;
     using Serilog;
+    using Serilog.Events;
 
     [UsedImplicitly]
     public sealed class ApiModule : NancyModule
@@ -24,15 +25,18 @@
                 {
                     Logger.Verbose("Processing {method} method for the path {path}", Request.Method, Request.Path);
 
-                    string text;
-                    int count;
-                    IEnumerable<string> errors;
-                    if (!suggestQueryParser.TryParse(Request.Query, out text, out count, out errors))
+                    using (Logger.BeginTimedOperation("suggest", level: LogEventLevel.Verbose))
                     {
-                        return Response.AsJson(errors, HttpStatusCode.BadRequest);
-                    }
+                        string text;
+                        int count;
+                        IEnumerable<string> errors;
+                        if (!suggestQueryParser.TryParse(Request.Query, out text, out count, out errors))
+                        {
+                            return Response.AsJson(errors, HttpStatusCode.BadRequest);
+                        }
 
-                    return Response.AsJson(suggestQueryHandler.Suggest(text, count));
+                        return Response.AsJson(suggestQueryHandler.Suggest(text, count));
+                    }
                 };
 
 
@@ -40,15 +44,18 @@
             {
                 Logger.Verbose("Processing {method} method for the path {path}", Request.Method, Request.Path);
 
-                string text;
-                int count;
-                IEnumerable<string> errors;
-                if (!searchQueryParser.TryParse(Request.Query, out text, out count, out errors))
+                using (Logger.BeginTimedOperation("query", level: LogEventLevel.Verbose))
                 {
-                    return Response.AsJson(errors, HttpStatusCode.BadRequest);
-                }
+                    string text;
+                    int count;
+                    IEnumerable<string> errors;
+                    if (!searchQueryParser.TryParse(Request.Query, out text, out count, out errors))
+                    {
+                        return Response.AsJson(errors, HttpStatusCode.BadRequest);
+                    }
 
-                return Response.AsJson(searchQueryHandler.Search(text, count));
+                    return Response.AsJson(searchQueryHandler.Search(text, count));
+                }
             };
         }
     }
