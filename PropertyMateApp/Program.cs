@@ -77,7 +77,7 @@
             {
                 if (logger != null)
                 {
-                    logger.Fatal(exception, "A fatal unhandled exception occured during execution.");
+                    logger.Fatal(exception, "A fatal unhandled exception occured during execution");
                     Environment.Exit(1);
                 }
                 else

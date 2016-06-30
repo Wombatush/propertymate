@@ -146,7 +146,6 @@
     <Compile Include="Impl\ISuggestQueryParser.cs" />
     <Compile Include="Impl\RuntimeOptions.cs" />
     <Compile Include="Impl\SearchQueryHandler.cs" />
-    <Compile Include="Impl\SearchRequest.cs" />
     <Compile Include="Impl\SuggestQueryHandler.cs" />
     <Compile Include="Impl\QueryParser.cs" />
     <Compile Include="Infrastructure\Starters\DataRestorationStarter.cs" />

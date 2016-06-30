@@ -5,7 +5,6 @@
     using System.Linq;
     using JetBrains.Annotations;
     using Nest;
-    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
     internal sealed class SearchQueryHandler : ISearchQueryHandler

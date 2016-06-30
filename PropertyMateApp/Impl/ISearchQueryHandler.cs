@@ -5,6 +5,7 @@
 
     public interface ISearchQueryHandler
     {
+        [NotNull, ItemNotNull]
         IEnumerable<dynamic> Search([NotNull] string text, int count);
     }
 }

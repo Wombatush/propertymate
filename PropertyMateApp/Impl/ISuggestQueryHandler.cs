@@ -5,6 +5,7 @@
 
     public interface ISuggestQueryHandler
     {
+        [NotNull, ItemNotNull]
         IEnumerable<dynamic> Suggest([NotNull] string text, int count);
     }
 }
