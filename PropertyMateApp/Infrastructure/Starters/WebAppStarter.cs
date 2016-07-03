@@ -3,6 +3,7 @@
     using System;
     using Autofac;
     using JetBrains.Annotations;
+    using Microsoft.Owin.Cors;
     using Microsoft.Owin.Hosting;
     using Owin;
     using PropertyMateApp.Impl;
@@ -34,7 +35,7 @@
             disposable = WebApp.Start(options.BaseServerUrl, app =>
             {
                 Logger.Debug("Configuring web app");
-
+                app.UseCors(CorsOptions.AllowAll);
                 app.UseNancy(options =>
                 {
                     options.Bootstrapper = bootstrapperFactory();
