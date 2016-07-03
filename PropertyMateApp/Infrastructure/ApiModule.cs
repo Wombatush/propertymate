@@ -35,7 +35,7 @@
                             return Response.AsJson(errors, HttpStatusCode.BadRequest);
                         }
 
-                        return Response.AsJson(suggestQueryHandler.Suggest(text, count));
+                        return Response.AsJson(new { matches = suggestQueryHandler.Suggest(text, count) });
                     }
                 };
 
@@ -54,7 +54,7 @@
                         return Response.AsJson(errors, HttpStatusCode.BadRequest);
                     }
 
-                    return Response.AsJson(searchQueryHandler.Search(text, count));
+                    return Response.AsJson(new { matches = searchQueryHandler.Search(text, count) });
                 }
             };
         }
