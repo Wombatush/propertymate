@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using JetBrains.Annotations;
+    using Nancy.Helpers;
     using Nest;
     using Newtonsoft.Json.Linq;
 
@@ -29,7 +30,7 @@
                     .Size(count)
                     .Sort(s => s.Descending(SortSpecialField.Score))
                     .MinScore(1.0)
-                    .Query(q => q.QueryString(s => s.Fields(f => f.Field("full_address_line")).Query(text)));
+                    .Query(q => q.QueryString(s => s.Fields(f => f.Field("full_address_line")).Query(HttpUtility.UrlEncode(text))));
             });
             if (response.IsValid)
             {

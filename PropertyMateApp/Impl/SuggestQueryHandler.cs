@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using JetBrains.Annotations;
+    using Nancy.Helpers;
     using Nest;
 
     internal sealed class SuggestQueryHandler : ISuggestQueryHandler
@@ -27,7 +28,7 @@
                     .From(0)
                     .Size(count)
                     .Sort(s => s.Descending(SortSpecialField.Score))
-                    .Query(q => q.Prefix("full_address_line", text));
+                    .Query(q => q.Prefix("full_address_line", HttpUtility.UrlEncode(text)));
             });
             if (response.IsValid)
             {
